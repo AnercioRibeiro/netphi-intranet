@@ -1,0 +1,36 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "slide-carousel-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/slideCarousel/SlideCarouselWebPart.js",
+          "manifest": "./src/webparts/slideCarousel/SlideCarouselWebPart.manifest.json"
+        }
+      ]
+    },
+    "quick-links-entry-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/quickLinksEntry/QuickLinksEntryWebPart.js",
+          "manifest": "./src/webparts/quickLinksEntry/QuickLinksEntryWebPart.manifest.json"
+        }
+      ]
+    },
+    "navbar-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/navbar/NavbarWebPart.js",
+          "manifest": "./src/webparts/navbar/NavbarWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "SlideCarouselWebPartStrings": "lib/webparts/slideCarousel/loc/{locale}.js",
+    "QuickLinksEntryWebPartStrings": "lib/webparts/quickLinksEntry/loc/{locale}.js",
+    "NavbarWebPartStrings": "lib/webparts/navbar/loc/{locale}.js"
+  }
+}

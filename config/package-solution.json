@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "netphi-intranet-client-side-solution",
+    "id": "9bcbb335-bae1-4992-b937-96fb9417df72",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.18.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "netphi-intranet description"
+      },
+      "longDescription": {
+        "default": "netphi-intranet description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "netphi-intranet Feature",
+        "description": "The feature that activates elements of the netphi-intranet solution.",
+        "id": "3b771715-0cc1-41cf-b1a2-9420b43fef82",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/netphi-intranet.sppkg"
+  }
+}
