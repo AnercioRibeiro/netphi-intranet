@@ -5,7 +5,8 @@ import '../../../assets/dist/tailwind.css';
 import {
   type IPropertyPaneConfiguration,
   PropertyPaneTextField
-} from '@microsoft/sp-property-pane';
+}
+from '@microsoft/sp-property-pane';
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 import { IReadonlyTheme } from '@microsoft/sp-component-base';
 
@@ -15,6 +16,7 @@ import { ISlideCarouselProps } from './components/ISlideCarouselProps';
 
 export interface ISlideCarouselWebPartProps {
   description: string;
+  images: string[];
 }
 
 export default class SlideCarouselWebPart extends BaseClientSideWebPart<ISlideCarouselWebPartProps> {
@@ -29,8 +31,9 @@ export default class SlideCarouselWebPart extends BaseClientSideWebPart<ISlideCa
         description: this.properties.description,
         isDarkTheme: this._isDarkTheme,
         environmentMessage: this._environmentMessage,
-        hasTeamsContext: !!this.context.sdks.microsoftTeams,
-        userDisplayName: this.context.pageContext.user.displayName
+        // hasTeamsContext: !!this.context.sdks.microsoftTeams,
+        // userDisplayName: this.context.pageContext.user.displayName,
+        images: this.properties.images
       }
     );
 
@@ -111,7 +114,11 @@ export default class SlideCarouselWebPart extends BaseClientSideWebPart<ISlideCa
               groupFields: [
                 PropertyPaneTextField('description', {
                   label: strings.DescriptionFieldLabel
-                })
+                }),
+                // PropertyPaneSlider('Images', {
+                  
+                // }),
+
               ]
             }
           ]
