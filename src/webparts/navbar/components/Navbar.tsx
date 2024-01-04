@@ -1,5 +1,5 @@
 import * as React from 'react';
-import styles from './Navbar.module.scss';
+//import styles from './Navbar.module.scss';
 import type { INavbarProps } from './INavbarProps';
 // import { escape } from '@microsoft/sp-lodash-subset';
 
@@ -14,7 +14,8 @@ export default class Navbar extends React.Component<INavbarProps, {}> {
     } = this.props;
     
     return (
-      <section className={`${styles.navbar} ${hasTeamsContext ? styles.teams : ''} p-0`}>
+      // `${styles.navbar} ${hasTeamsContext ? styles.teams : ''} 
+      <section className="p-0">
       <nav className="bg-gray-200 w-full h-[80px] p-2 flex gap-2 items-center justify-between">
       <h1 className="ml-6">Logo</h1>
       <ul className="flex gap-8 justify-between list-none">

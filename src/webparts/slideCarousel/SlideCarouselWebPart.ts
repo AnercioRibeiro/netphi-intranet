@@ -12,7 +12,7 @@ import { IReadonlyTheme } from '@microsoft/sp-component-base';
 
 import * as strings from 'SlideCarouselWebPartStrings';
 import SlideCarousel from './components/SlideCarousel';
-import { ISlideCarouselProps } from './components/ISlideCarouselProps';
+import { ICarouselElement, ISlideCarouselProps } from './components/ISlideCarouselProps';
 
 export interface ISlideCarouselWebPartProps {
   description: string;
@@ -25,15 +25,42 @@ export default class SlideCarouselWebPart extends BaseClientSideWebPart<ISlideCa
   private _environmentMessage: string = '';
 
   public render(): void {
+
+    const carouselElements: ICarouselElement[] = [
+      {
+        imageSrc: 'https://carconfigurator.ferrari.com/assets/cars/portofinom/packages/default/car-ferrari-portofino-m_splash.jpg',
+        title: 'Ferrari Portofino',
+        description: 'This is the Ferrari Portofino',
+        url: 'https://www.ferrari.com/it-IT/auto/ferrari-portofino-m',
+      },
+      {
+        imageSrc: 'https://api.ferrari.com/cms/network/medias//resize/617a6c931823990948a5b059-ferrari-genuine-car-configurator-2021-news-l?apikey=9QscUiwr5n0NhOuQb463QEKghPrVlpaF',
+        title: 'Ferrari 812 GTS',
+        description: 'This is the Ferrari 812 GTS',
+        url: 'https://www.ferrari.com/it-IT/auto/812-gts',
+      },
+      {
+        imageSrc: 'https://api.ferrari.com/cms/network/medias//resize/6093caece41d634de6171ac6-ferrari-magazine--qb4MPUu-z.jpg?apikey=9QscUiwr5n0NhOuQb463QEKghPrVlpaF&width=768&height=430',
+        title: 'Ferrari F8 Tributo',
+        description: 'This is the Ferrari F8 Tributo',
+        url: 'https://www.ferrari.com/it-IT/magazine/articles/reveal-ferrari-f8-tributo',
+      },
+      {
+        imageSrc: 'https://cdn.motor1.com/images/mgl/n2mnj/s1/ferrari-458-italia.jpg',
+        title: 'Ferrari 458 Italia',
+        description: 'This is the Ferrari 458 Italia',
+        url: 'https://www.ferrari.com/it-IT/auto/458-italia',
+      },
+    ];
     const element: React.ReactElement<ISlideCarouselProps> = React.createElement(
       SlideCarousel,
       {
         description: this.properties.description,
         isDarkTheme: this._isDarkTheme,
         environmentMessage: this._environmentMessage,
-        // hasTeamsContext: !!this.context.sdks.microsoftTeams,
-        // userDisplayName: this.context.pageContext.user.displayName,
-        images: this.properties.images
+        hasTeamsContext: !!this.context.sdks.microsoftTeams,
+        userDisplayName: this.context.pageContext.user.displayName,
+        elements: carouselElements
       }
     );
 
@@ -41,38 +68,19 @@ export default class SlideCarouselWebPart extends BaseClientSideWebPart<ISlideCa
   }
 
   protected onInit(): Promise<void> {
-    return this._getEnvironmentMessage().then(message => {
-      this._environmentMessage = message;
-    });
+    this._environmentMessage = this._getEnvironmentMessage();
+
+    return super.onInit();
   }
 
 
 
-  private _getEnvironmentMessage(): Promise<string> {
-    if (!!this.context.sdks.microsoftTeams) { // running in Teams, office.com or Outlook
-      return this.context.sdks.microsoftTeams.teamsJs.app.getContext()
-        .then(context => {
-          let environmentMessage: string = '';
-          switch (context.app.host.name) {
-            case 'Office': // running in Office
-              environmentMessage = this.context.isServedFromLocalhost ? strings.AppLocalEnvironmentOffice : strings.AppOfficeEnvironment;
-              break;
-            case 'Outlook': // running in Outlook
-              environmentMessage = this.context.isServedFromLocalhost ? strings.AppLocalEnvironmentOutlook : strings.AppOutlookEnvironment;
-              break;
-            case 'Teams': // running in Teams
-            case 'TeamsModern':
-              environmentMessage = this.context.isServedFromLocalhost ? strings.AppLocalEnvironmentTeams : strings.AppTeamsTabEnvironment;
-              break;
-            default:
-              environmentMessage = strings.UnknownEnvironment;
-          }
-
-          return environmentMessage;
-        });
+  private _getEnvironmentMessage(): string {
+    if (!!this.context.sdks.microsoftTeams) { // running in Teams
+      return this.context.isServedFromLocalhost ? strings.AppLocalEnvironmentTeams : strings.AppTeamsTabEnvironment;
     }
 
-    return Promise.resolve(this.context.isServedFromLocalhost ? strings.AppLocalEnvironmentSharePoint : strings.AppSharePointEnvironment);
+    return this.context.isServedFromLocalhost ? strings.AppLocalEnvironmentSharePoint : strings.AppSharePointEnvironment;
   }
 
   protected onThemeChanged(currentTheme: IReadonlyTheme | undefined): void {
@@ -114,11 +122,7 @@ export default class SlideCarouselWebPart extends BaseClientSideWebPart<ISlideCa
               groupFields: [
                 PropertyPaneTextField('description', {
                   label: strings.DescriptionFieldLabel
-                }),
-                // PropertyPaneSlider('Images', {
-                  
-                // }),
-
+                })
               ]
             }
           ]

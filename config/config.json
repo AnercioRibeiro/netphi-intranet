@@ -6,7 +6,8 @@
       "components": [
         {
           "entrypoint": "./lib/webparts/slideCarousel/SlideCarouselWebPart.js",
-          "manifest": "./src/webparts/slideCarousel/SlideCarouselWebPart.manifest.json"
+          "manifest": "./src/webparts/slideCarousel/SlideCarouselWebPart.manifest.json",
+          "module.scss":"./src/webparts/slideCarousel/SlideCarousel.module.scss"
         }
       ]
     },
@@ -23,6 +24,7 @@
         {
           "entrypoint": "./lib/webparts/navbar/NavbarWebPart.js",
           "manifest": "./src/webparts/navbar/NavbarWebPart.manifest.json"
+
         }
       ]
     }
@@ -31,6 +33,7 @@
   "localizedResources": {
     "SlideCarouselWebPartStrings": "lib/webparts/slideCarousel/loc/{locale}.js",
     "QuickLinksEntryWebPartStrings": "lib/webparts/quickLinksEntry/loc/{locale}.js",
-    "NavbarWebPartStrings": "lib/webparts/navbar/loc/{locale}.js"
+    "NavbarWebPartStrings": "lib/webparts/navbar/loc/{locale}.js",
+    "ControlStrings": "node_modules/@pnp/spfx-controls-react/lib/loc/{locale}.js"
   }
 }
